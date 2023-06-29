@@ -33,8 +33,9 @@ function Accueil() {
       .then((result) => {
         setDataProducts(result.data);
         result.data.forEach((opts, i) => {
-          xValues[i] = opts.nomProduit;
-          yValues[i] = opts.qteProduit;
+          var dP = opts.designation_article.substring(0, 15);
+          xValues[i] = dP;
+          yValues[i] = opts.q_sortie;
         });
         setDataNomProduits(xValues);
         setDataQteProduits(yValues);

@@ -197,7 +197,7 @@ body {
 }
 
 .Main {
-  margin-top: 135px;
+  margin-top: 35px;
 }
 
 #myChart {
@@ -281,7 +281,6 @@ body {
 
 .container-table {
   margin-top: 20px;
-  margin-left: 20px;
 }
 
 .div-Recherche-Table {
@@ -297,11 +296,14 @@ body {
   color: white;
   font-size: 17px;
   border-radius: 8px;
+  box-shadow: 2px 2px 4px #000000;
+  width: 100%;
 }
 
 .Table-Info th {
   border: 2px solid #3498db;
   padding: 5px 10px;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .Table-Info td {
@@ -309,6 +311,7 @@ body {
   padding: 5px 10px;
   transition: all 0.5s;
   text-align: center;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 #tr-Body {
@@ -323,4 +326,18 @@ body {
 
 #table-tbody {
   transition: all 0.5s;
+}
+
+.Main-Chart #myChart {
+  width: 1200px;
+  height: 570px;
+}
+
+#tr-Titre legend {
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.Table-Recherche {
+  margin-left: 20px;
+  width: fit-content;
 }

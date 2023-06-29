@@ -12,11 +12,15 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function ChartProduit() {
   const [ChartLabel, setChartLabel] = useState("");
+  const [produitFournisseur, setproduitFournisseur] = useState("");
+  const [produitCat, setproduitCat] = useState("");
   const [dataTribs, setDataTribs] = useState([]);
   const [dataServices, setDataServices] = useState([]);
   const [dataProducts, setDataProducts] = useState([]);
@@ -48,7 +52,7 @@ function ChartProduit() {
     axios
       .get("http://localhost:5000/Services", {
         params: {
-          idTrib: dataTribs[T].idTrib,
+          trib: dataTribs[T].trib,
         },
       })
       .then((result) => {
@@ -81,42 +85,46 @@ function ChartProduit() {
       T.selectedIndex === 0 ||
       D === ""
     ) {
-      alert("veuillez remplir tout les champs svp!");
+      toast("❌ Veuillez remplir tout les champs !");
     } else {
       var MydateArray = D.split("-");
-      console.log(MydateArray);
       axios
         .get("http://localhost:5000/get", {
           params: {
-            idProduit: dataProducts[P.value].idProduit,
-            idService: dataServices[S.value].idService,
+            id_article: dataProducts[P.value].id_article,
+            service: dataServices[S.value].service,
             yearSortie: MydateArray[0],
             monthSortie: MydateArray[1],
           },
         })
         .then((result) => {
+          if (result.data[0] === undefined) {
+            toast("⚠️ Il n'y a pas de sorties à cette date!");
+          }
           result.data.forEach((opts, i) => {
-            var dateLower = format(new Date(opts.dateSortie), "MMMM d", {
+            var dateLower = format(new Date(opts.date_sortie), "MMMM d", {
               locale: fr,
             });
             xValues[i] = dateLower.charAt(0).toUpperCase() + dateLower.slice(1);
             yValues[i] = opts["Quantite Total"];
-            var Dtable = format(new Date(opts.dateSortie), "MMMM", {
+            var Dtable = format(new Date(opts.date_sortie), "MMMM", {
               locale: fr,
             });
             dValues[i] =
-              format(new Date(opts.dateSortie), "d", {
+              format(new Date(opts.date_sortie), "d", {
                 locale: fr,
               }) +
               " " +
               Dtable.charAt(0).toUpperCase() +
               Dtable.slice(1) +
               " " +
-              format(new Date(opts.dateSortie), "Y", {
+              format(new Date(opts.date_sortie), "Y", {
                 locale: fr,
               });
           });
-          setChartLabel(dataProducts[P.value].nomProduit);
+          setChartLabel(dataProducts[P.value].designation_article);
+          setproduitFournisseur(dataProducts[P.value].nom_four);
+          setproduitCat(dataProducts[P.value].cat);
           setDataDateSorties(xValues);
           setDataQteSorties(yValues);
           setDataFullDate(dValues);
@@ -176,7 +184,7 @@ function ChartProduit() {
                   <select id="selectnomTrib" onChange={GetServices}>
                     <option hidden>-- Sélectionnez --</option>
                     {dataTribs.map((opts, i) => (
-                      <option value={i}>{opts.nomTrib}</option>
+                      <option value={i}>{opts.trib}</option>
                     ))}
                   </select>
                 </div>
@@ -184,7 +192,7 @@ function ChartProduit() {
                   <select id="selectnomService">
                     <option hidden>-- Sélectionnez --</option>
                     {dataServices.map((opts, i) => (
-                      <option value={i}>{opts.nomService}</option>
+                      <option value={i}>{opts.service}</option>
                     ))}
                   </select>
                 </div>
@@ -203,7 +211,7 @@ function ChartProduit() {
                   <select id="selectnomProduit">
                     <option hidden>-- Sélectionnez --</option>
                     {dataProducts.map((opts, i) => (
-                      <option value={i}>{opts.nomProduit}</option>
+                      <option value={i}>{opts.designation_article}</option>
                     ))}
                   </select>
                 </div>
@@ -223,28 +231,49 @@ function ChartProduit() {
             </div>
           </div>
         </div>
-        <div className="container-table">
-          <table className="Table-Info">
-            <thead>
-              <tr id="tr-Titre">
-                <th colSpan="2">Produit : {ChartLabel}</th>
-              </tr>
-              <tr>
-                <th>Date de Sortie</th>
-                <th>Quantité Total</th>
-              </tr>
-            </thead>
-            <tbody id="table-tbody">
-              {dataQteSorties.map((opts, i) => (
-                <tr id="tr-Body">
-                  <td>{dataFullDate[i]}</td>
-                  <td>{opts}</td>
+        <div className="Table-Recherche">
+          <div className="container-table">
+            <table className="Table-Info">
+              <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th>:</th>
+                  <th>{ChartLabel}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+                <tr>
+                  <th>Catégorie</th>
+                  <th>:</th>
+                  <th>{produitCat}</th>
+                </tr>
+                <tr>
+                  <th>Fournisseur</th>
+                  <th>:</th>
+                  <th>{produitFournisseur}</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div className="container-table">
+            <table className="Table-Info">
+              <thead>
+                <tr>
+                  <th>Date de Sortie</th>
+                  <th>Quantité Total</th>
+                </tr>
+              </thead>
+              <tbody id="table-tbody">
+                {dataQteSorties.map((opts, i) => (
+                  <tr id="tr-Body">
+                    <td>{dataFullDate[i]}</td>
+                    <td>{opts}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

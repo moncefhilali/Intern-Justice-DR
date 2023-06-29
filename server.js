@@ -12,10 +12,10 @@ app.listen(port, () => console.log(`listening on port ${port}...`));
 
 // Config :
 var config = {
-  server: "DESKTOP-3SA4E25",
-  database: "Intrn_Justice_DR",
-  user: "sa",
-  password: "1234",
+  server: "10.10.23.116",
+  database: "sdr_achat_back",
+  user: "webAppUser",
+  password: "124599",
   options: {
     trustServerCertificate: true,
   },
@@ -35,24 +35,30 @@ sql
 
 // Api get products :
 app.get("/Produits", (req, res) => {
-  request.query("Select * from Produit", function (err, records) {
-    if (err) console.log(err);
-    else res.send(records.recordset);
-  });
+  request.query(
+    "select top 40 id_article, designation_article, q_sortie, cat, nom_four from sdr_achat_back.dbo.web_app_stat_view",
+    function (err, records) {
+      if (err) console.log(err);
+      else res.send(records.recordset);
+    }
+  );
 });
 
 // Api get Tribs :
 app.get("/Tribs", (req, res) => {
-  request.query("Select * from Trib", function (err, records) {
-    if (err) console.log(err);
-    else res.send(records.recordset);
-  });
+  request.query(
+    "select distinct top 50 trib from sdr_achat_back.dbo.web_app_stat_view",
+    function (err, records) {
+      if (err) console.log(err);
+      else res.send(records.recordset);
+    }
+  );
 });
 
 // Api get Services :
 app.get("/Services", (req, res) => {
   request.query(
-    `Select * from _Service where idTrib = '${req.query.idTrib}'`,
+    `select distinct service from sdr_achat_back.dbo.web_app_stat_view where trib = '${req.query.trib}'`,
     function (err, records) {
       if (err) console.log(err);
       else res.send(records.recordset);
@@ -63,7 +69,7 @@ app.get("/Services", (req, res) => {
 // Api get total quantity :
 app.get("/get", (req, res) => {
   request.query(
-    `SELECT dateSortie ,sum(qteSortie) as 'Quantite Total' FROM Sortie WHERE idProduit = ${req.query.idProduit} AND idService = ${req.query.idService} AND DATEPART(MONTH,dateSortie) = '${req.query.monthSortie}' AND DATEPART(YEAR,dateSortie) = '${req.query.yearSortie}' group by dateSortie order by dateSortie`,
+    `SELECT CAST(date_sortie AS DATE) as 'date_sortie', sum(q_sortie) as 'Quantite Total' FROM sdr_achat_back.dbo.web_app_stat_view WHERE id_article = ${req.query.id_article} AND service = '${req.query.service}' AND DATEPART(MONTH,date_sortie) = '${req.query.monthSortie}' AND DATEPART(YEAR,date_sortie) = '${req.query.yearSortie}' group by CAST(date_sortie AS DATE) order by CAST(date_sortie AS DATE)`,
     function (err, records) {
       if (err) console.log(err);
       else res.send(records.recordset);
