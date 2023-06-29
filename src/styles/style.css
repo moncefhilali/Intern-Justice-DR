@@ -1,0 +1,326 @@
+.Navbar {
+  background-color: white;
+  display: flex;
+  height: 30px;
+}
+
+.Navbar-links-right,
+.Navbar-links-left {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.Navbar-links-right {
+  margin-right: 10%;
+  justify-content: flex-end;
+}
+
+.Navbar-links-left {
+  margin-left: 10%;
+}
+
+.div-link1,
+.div-link2,
+.div-link3 {
+  height: 30px;
+  margin: 0;
+  display: flex;
+  width: 100px;
+  padding: 0;
+  justify-content: center;
+}
+
+.Navbar-links-left a,
+.Navbar-links-right a {
+  text-align: center;
+  padding: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #328f8a;
+  width: 100px;
+  transition: all 0.6s;
+}
+
+.Navbar-links-left a:hover,
+.Navbar-links-right a:hover {
+  color: #fff;
+  background-color: #328f8a;
+}
+
+.container-Gestion .Gestion-Upper {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.container-Gestion .Gestion-Lower {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Gestion-Upper form {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.Gestion-Lower form {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.container-Gestion .form button,
+.container-Recherche .form button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  outline: 0;
+  background-color: #328f8a;
+  background-image: linear-gradient(45deg, #328f8a, #08ac4b);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.container-Recherche {
+  width: fit-content;
+  margin-right: 20px;
+}
+
+.container-Recherche .form {
+  width: 590px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.container-Gestion .form {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  z-index: 1;
+  background: #ffffff;
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.container-Gestion td {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 200px;
+}
+
+.container-Gestion .form table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.container-Gestion .form input,
+.container-Recherche .form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  width: 100%;
+}
+
+.container-Gestion #Form-Submit {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  outline: 0;
+  background-color: #328f8a;
+  background-image: linear-gradient(45deg, #328f8a, #08ac4b);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.container-Gestion .form select {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  width: 100%;
+}
+
+.container-Gestion legend {
+  text-align: center;
+  color: #328f8a;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 15px;
+}
+
+body {
+  background-color: #328f8a;
+  background-image: linear-gradient(45deg, #328f8a, #08ac4b);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+.Main {
+  margin-top: 135px;
+}
+
+#myChart {
+  width: 700px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  background: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.InputSection {
+  display: flex;
+  height: 50px;
+  width: auto;
+}
+
+#selectnomService,
+#selectnomTrib,
+#selectnomProduit {
+  height: auto;
+  width: 100%;
+  background-color: #f2f2f2;
+  border: 1px solid black;
+  padding-left: 15px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#dateSortie {
+  font-weight: bold;
+  float: right;
+  margin: 0;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.divSelect {
+  display: flex;
+  height: auto;
+  width: 40%;
+}
+
+.divDate {
+  display: flex;
+  float: right;
+  height: auto;
+  width: 40%;
+  margin-left: 20%;
+}
+
+/* Label Section */
+
+.LabelSection {
+  display: flex;
+  width: auto;
+}
+
+#divLabelAr {
+  width: 40%;
+}
+
+#divLabelDa {
+  margin-left: 20%;
+}
+
+.container {
+  display: flex;
+}
+
+/*div.container {
+      margin: auto ;
+      margin-top: 5%;
+      width: 50%;
+      border-style:solid ;
+      border: 2px;
+      border-color: black;
+      background-color: lightpink;
+    }*/
+
+.container-table {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.div-Recherche-Table {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.Table-Info {
+  border: 4px solid #3498db;
+  background-color: #3498db;
+  color: white;
+  font-size: 17px;
+  border-radius: 8px;
+}
+
+.Table-Info th {
+  border: 2px solid #3498db;
+  padding: 5px 10px;
+}
+
+.Table-Info td {
+  border: 1px solid #3498db;
+  padding: 5px 10px;
+  transition: all 0.5s;
+  text-align: center;
+}
+
+#tr-Body {
+  transition: all 0.5s;
+  cursor: pointer;
+  background-color: #2f9286;
+}
+
+#tr-Body:hover {
+  background-color: #1d5a53;
+}
+
+#table-tbody {
+  transition: all 0.5s;
+}
